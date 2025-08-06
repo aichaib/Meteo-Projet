@@ -32,6 +32,86 @@ export async function GET(request) {
         annee: 2024,
         precipitation_moy: 2.86,
         temperature_moy: 6.46
+      },
+      {
+        province_code: 'ON',
+        province_nom: 'Ontario',
+        station: 'TORONTO PEARSON INTL',
+        annee: 2024,
+        precipitation_moy: 2.45,
+        temperature_moy: 8.12
+      },
+      {
+        province_code: 'MB',
+        province_nom: 'Manitoba',
+        station: 'WINNIPEG INTL A',
+        annee: 2024,
+        precipitation_moy: 1.92,
+        temperature_moy: 2.34
+      },
+      {
+        province_code: 'SK',
+        province_nom: 'Saskatchewan',
+        station: 'SASKATOON INTL A',
+        annee: 2024,
+        precipitation_moy: 1.56,
+        temperature_moy: 1.89
+      },
+      {
+        province_code: 'NS',
+        province_nom: 'Nouvelle-Écosse',
+        station: 'HALIFAX STANFIELD INTL',
+        annee: 2024,
+        precipitation_moy: 4.23,
+        temperature_moy: 7.89
+      },
+      {
+        province_code: 'NB',
+        province_nom: 'Nouveau-Brunswick',
+        station: 'FREDERICTON A',
+        annee: 2024,
+        precipitation_moy: 3.67,
+        temperature_moy: 6.45
+      },
+      {
+        province_code: 'PE',
+        province_nom: 'Île-du-Prince-Édouard',
+        station: 'CHARLOTTETOWN A',
+        annee: 2024,
+        precipitation_moy: 3.12,
+        temperature_moy: 5.78
+      },
+      {
+        province_code: 'NL',
+        province_nom: 'Terre-Neuve-et-Labrador',
+        station: 'ST JOHN\'S INTL A',
+        annee: 2024,
+        precipitation_moy: 4.89,
+        temperature_moy: 4.23
+      },
+      {
+        province_code: 'YT',
+        province_nom: 'Yukon',
+        station: 'WHITEHORSE A',
+        annee: 2024,
+        precipitation_moy: 0.45,
+        temperature_moy: -2.34
+      },
+      {
+        province_code: 'NT',
+        province_nom: 'Territoires du Nord-Ouest',
+        station: 'YELLOWKNIFE A',
+        annee: 2024,
+        precipitation_moy: 0.23,
+        temperature_moy: -5.67
+      },
+      {
+        province_code: 'NU',
+        province_nom: 'Nunavut',
+        station: 'IQALUIT A',
+        annee: 2024,
+        precipitation_moy: 0.12,
+        temperature_moy: -8.91
       }
     ];
     

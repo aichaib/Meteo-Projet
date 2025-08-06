@@ -161,14 +161,16 @@ export default function Precipitations() {
                             </select>
                         </div>
 
-                        {/* Bouton de rafraîchissement */}
+                        {/* Bouton de réinitialisation */}
                         <div className="flex items-end">
                             <button
-                                onClick={fetchPrecipitations}
-                                disabled={loading}
-                                className="w-full bg-gradient-to-r from-blue-500 to-green-500 text-white py-3 px-6 rounded-xl font-semibold hover:from-blue-600 hover:to-green-600 transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                onClick={() => {
+                                    setSelectedProvince('toutes');
+                                    setSelectedAnnee('toutes');
+                                }}
+                                className="w-full bg-gradient-to-r from-blue-500 to-green-500 text-white py-3 px-6 rounded-xl font-semibold hover:from-blue-600 hover:to-green-600 transform hover:scale-105 transition-all duration-300"
                             >
-                                {loading ? 'Chargement...' : 'Actualiser'}
+                                Réinitialiser
                             </button>
                         </div>
                     </div>
@@ -176,7 +178,7 @@ export default function Precipitations() {
 
                 {/* Statistiques */}
                 {precipitations.length > 0 && (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
                             <div className="flex items-center">
                                 <Image
@@ -197,23 +199,13 @@ export default function Precipitations() {
 
                         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
                             <div className="flex items-center">
-                                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
-                                    <span className="text-2xl">📊</span>
-                                </div>
-                                <div>
-                                    <p className="text-sm text-gray-600">Température Moyenne</p>
-                                    <p className="text-2xl font-bold text-green-600">
-                                        {(precipitations.reduce((sum, item) => sum + (item.temperature_moy || 0), 0) / precipitations.length).toFixed(1)}°C
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
-                            <div className="flex items-center">
-                                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
-                                    <span className="text-2xl">📍</span>
-                                </div>
+                                <Image
+                                    src="/img/provinces.webp"
+                                    alt="Provinces"
+                                    width={48}
+                                    height={48}
+                                    className="w-12 h-12 mr-4"
+                                />
                                 <div>
                                     <p className="text-sm text-gray-600">Stations</p>
                                     <p className="text-2xl font-bold text-purple-600">
@@ -227,11 +219,6 @@ export default function Precipitations() {
 
                 {/* Tableau de données */}
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                    <div className="p-6 border-b border-gray-200">
-                        <h3 className="text-xl font-semibold text-gray-800">
-                            Données Détaillées ({precipitations.length} enregistrements)
-                        </h3>
-                    </div>
                     
                     {loading ? (
                         <div className="p-8 text-center">
@@ -241,36 +228,32 @@ export default function Precipitations() {
                     ) : precipitations.length > 0 ? (
                         <div className="overflow-x-auto">
                             <table className="w-full">
-                                <thead className="bg-gray-50">
-                                    <tr>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Province</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Année</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Précipitations (mm)</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Température (°C)</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Station</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200">
-                                    {precipitations.map((item, index) => (
-                                        <tr key={index} className="hover:bg-gray-50 transition-colors duration-200">
-                                            <td className="px-6 py-4 text-sm text-gray-900 font-medium">
-                                                {item.province_nom}
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">
-                                                {item.annee}
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">
-                                                {item.precipitation_moy ? `${item.precipitation_moy.toFixed(1)} mm` : 'N/A'}
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">
-                                                {item.temperature_moy ? `${item.temperature_moy.toFixed(1)}°C` : 'N/A'}
-                                            </td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">
-                                                {item.station}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
+                                                                 <thead className="bg-gray-50">
+                                     <tr>
+                                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Province</th>
+                                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Année</th>
+                                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Précipitations (mm)</th>
+                                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Station</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody className="divide-y divide-gray-200">
+                                     {precipitations.map((item, index) => (
+                                         <tr key={index} className="hover:bg-gray-50 transition-colors duration-200">
+                                             <td className="px-6 py-4 text-sm text-gray-900 font-medium">
+                                                 {item.province_nom}
+                                             </td>
+                                             <td className="px-6 py-4 text-sm text-gray-700">
+                                                 {item.annee}
+                                             </td>
+                                             <td className="px-6 py-4 text-sm text-gray-700">
+                                                 {item.precipitation_moy ? `${item.precipitation_moy.toFixed(1)} mm` : 'N/A'}
+                                             </td>
+                                             <td className="px-6 py-4 text-sm text-gray-700">
+                                                 {item.station}
+                                             </td>
+                                         </tr>
+                                     ))}
+                                 </tbody>
                             </table>
                         </div>
                     ) : (
