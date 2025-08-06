@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-lg p-4 mb-6 border-b border-gray-200">
+    <div className="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-lg p-4 mb-6 border-b border-gray-200">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         {/* 1) Bloc gauche : logo + titre */}
         <Link href="/" className="flex items-center space-x-3 group">
@@ -29,6 +29,6 @@ export default function Header() {
           Contactez‑Nous
         </Link>
       </div>
-    </header>
+    </div>
   );
 }

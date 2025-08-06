@@ -1,9 +1,290 @@
+"use client";
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+
 export default function Precipitations() {
+    const [provinces, setProvinces] = useState([]);
+    const [precipitations, setPrecipitations] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [selectedProvince, setSelectedProvince] = useState('toutes');
+    const [selectedAnnee, setSelectedAnnee] = useState('toutes');
+    const [annees, setAnnees] = useState([]);
+    const [error, setError] = useState(null);
+
+    // Récupérer les provinces
+    useEffect(() => {
+        const fetchProvinces = async () => {
+            try {
+                const response = await fetch('/api/provinces');
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    setProvinces(data);
+                } else {
+                    console.error('Données de provinces invalides:', data);
+                    setProvinces([]);
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement des provinces:', error);
+                setError('Impossible de charger les provinces');
+                setProvinces([]);
+            }
+        };
+        fetchProvinces();
+    }, []);
+
+    // Récupérer les années disponibles
+    useEffect(() => {
+        const fetchAnnees = async () => {
+            try {
+                const response = await fetch('/api/faits?type=annees');
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    setAnnees(data);
+                } else {
+                    console.error('Données d\'années invalides:', data);
+                    setAnnees([]);
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement des années:', error);
+                setError('Impossible de charger les années');
+                setAnnees([]);
+            }
+        };
+        fetchAnnees();
+    }, []);
+
+    // Récupérer les données de précipitations
+    const fetchPrecipitations = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const params = new URLSearchParams();
+            if (selectedProvince !== 'toutes') params.append('province', selectedProvince);
+            if (selectedAnnee !== 'toutes') params.append('annee', selectedAnnee);
+            
+            const response = await fetch(`/api/precipitations?${params}`);
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP: ${response.status}`);
+            }
+            const data = await response.json();
+            if (Array.isArray(data)) {
+                setPrecipitations(data);
+            } else {
+                console.error('Données de précipitations invalides:', data);
+                setPrecipitations([]);
+            }
+        } catch (error) {
+            console.error('Erreur lors du chargement des précipitations:', error);
+            setError('Impossible de charger les données de précipitations');
+            setPrecipitations([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchPrecipitations();
+    }, [selectedProvince, selectedAnnee]);
+
     return (
-        <section id="precipitations" className=" min-h-screen max-w-3xl mx-auto my-12">
-            <p className="text-lg text-gray-700 italic bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-500">
-                Precipitations data will be displayed here.
-            </p>
+        <section id="precipitations" className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-12">
+            <div className="container mx-auto px-4">
+                {/* En-tête */}
+                <div className="text-center mb-8">
+                    <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
+                        Données de Précipitations
+                    </h2>
+                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Explorez les données de précipitations au Canada entre 2019 et 2024. 
+                        Filtrez par province et année pour analyser les tendances climatiques.
+                    </p>
+                </div>
+
+                {/* Message d'erreur */}
+                {error && (
+                    <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
+                        <div className="flex items-center">
+                            <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                                <span className="text-red-600 text-sm">⚠️</span>
+                            </div>
+                            <p className="text-red-700">{error}</p>
+                        </div>
+                    </div>
+                )}
+
+                {/* Filtres */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 mb-8 border border-white/20">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {/* Filtre Province */}
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Province
+                            </label>
+                            <select
+                                value={selectedProvince}
+                                onChange={(e) => setSelectedProvince(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                                disabled={provinces.length === 0}
+                            >
+                                <option value="toutes">Toutes les provinces</option>
+                                {Array.isArray(provinces) && provinces.map((province, index) => (
+                                    <option key={index} value={province.code}>
+                                        {province.nom}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Filtre Année */}
+                        <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                Année
+                            </label>
+                            <select
+                                value={selectedAnnee}
+                                onChange={(e) => setSelectedAnnee(e.target.value)}
+                                className="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
+                                disabled={annees.length === 0}
+                            >
+                                <option value="toutes">Toutes les années</option>
+                                {Array.isArray(annees) && annees.map((annee, index) => (
+                                    <option key={index} value={annee.annee}>
+                                        {annee.annee}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        {/* Bouton de rafraîchissement */}
+                        <div className="flex items-end">
+                            <button
+                                onClick={fetchPrecipitations}
+                                disabled={loading}
+                                className="w-full bg-gradient-to-r from-blue-500 to-green-500 text-white py-3 px-6 rounded-xl font-semibold hover:from-blue-600 hover:to-green-600 transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {loading ? 'Chargement...' : 'Actualiser'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Statistiques */}
+                {precipitations.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
+                            <div className="flex items-center">
+                                <Image
+                                    src="/img/Precipitation.webp"
+                                    alt="Précipitations"
+                                    width={48}
+                                    height={48}
+                                    className="w-12 h-12 mr-4"
+                                />
+                                <div>
+                                    <p className="text-sm text-gray-600">Total Précipitations</p>
+                                    <p className="text-2xl font-bold text-blue-600">
+                                        {precipitations.reduce((sum, item) => sum + (item.precipitation_moy || 0), 0).toFixed(1)} mm
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
+                            <div className="flex items-center">
+                                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
+                                    <span className="text-2xl">📊</span>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-600">Température Moyenne</p>
+                                    <p className="text-2xl font-bold text-green-600">
+                                        {(precipitations.reduce((sum, item) => sum + (item.temperature_moy || 0), 0) / precipitations.length).toFixed(1)}°C
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
+                            <div className="flex items-center">
+                                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
+                                    <span className="text-2xl">📍</span>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-600">Stations</p>
+                                    <p className="text-2xl font-bold text-purple-600">
+                                        {new Set(precipitations.map(item => item.station)).size}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Tableau de données */}
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
+                    <div className="p-6 border-b border-gray-200">
+                        <h3 className="text-xl font-semibold text-gray-800">
+                            Données Détaillées ({precipitations.length} enregistrements)
+                        </h3>
+                    </div>
+                    
+                    {loading ? (
+                        <div className="p-8 text-center">
+                            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                            <p className="mt-4 text-gray-600">Chargement des données...</p>
+                        </div>
+                    ) : precipitations.length > 0 ? (
+                        <div className="overflow-x-auto">
+                            <table className="w-full">
+                                <thead className="bg-gray-50">
+                                    <tr>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Province</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Année</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Précipitations (mm)</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Température (°C)</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Station</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200">
+                                    {precipitations.map((item, index) => (
+                                        <tr key={index} className="hover:bg-gray-50 transition-colors duration-200">
+                                            <td className="px-6 py-4 text-sm text-gray-900 font-medium">
+                                                {item.province_nom}
+                                            </td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                                {item.annee}
+                                            </td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                                {item.precipitation_moy ? `${item.precipitation_moy.toFixed(1)} mm` : 'N/A'}
+                                            </td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                                {item.temperature_moy ? `${item.temperature_moy.toFixed(1)}°C` : 'N/A'}
+                                            </td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                                {item.station}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <div className="p-8 text-center">
+                            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span className="text-2xl">🌧️</span>
+                            </div>
+                            <p className="text-gray-600">
+                                {error ? 'Erreur lors du chargement des données' : 'Aucune donnée de précipitations trouvée pour les critères sélectionnés.'}
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </div>
         </section>
     );
 }
