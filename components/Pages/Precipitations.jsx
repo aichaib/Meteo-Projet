@@ -74,8 +74,6 @@ export default function Precipitations() {
  
             const response = await fetch(`/api/faits?${params}`);
 
-            const response = await fetch(`/api/precipitations?${params}`);
-
             if (!response.ok) {
                 throw new Error(`Erreur HTTP: ${response.status}`);
             }
@@ -267,12 +265,6 @@ export default function Precipitations() {
                                         <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">Station</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">Latitude</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">Longitude</th>
-
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Province</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Année</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Précipitations (mm)</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Station</th>
-
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
