@@ -23,7 +23,7 @@ export default function Header() {
 
         {/* 2) Bloc droit : lien de contact */}
         <Link
-          href="#contact"
+          href="/Contact"
           className="text-sm text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium"
         >
           Contactez‑Nous

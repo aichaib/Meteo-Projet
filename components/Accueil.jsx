@@ -66,7 +66,7 @@ export default function HomePage() {
                                 <ul className="space-y-4">
                                     <li>
                                         <Link 
-                                            href="#temperature" 
+                                            href="/Temperature" 
                                             className="flex items-center p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                                         >
                                             <Image
@@ -81,7 +81,7 @@ export default function HomePage() {
                                     </li>
                                     <li>
                                         <Link 
-                                            href="#precipitations" 
+                                            href="/Precipitations" 
                                             className="flex items-center p-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                                         >
                                             <Image
@@ -96,7 +96,7 @@ export default function HomePage() {
                                     </li>
                                     <li>
                                         <Link 
-                                            href="#pollution" 
+                                            href="/Pollution" 
                                             className="flex items-center p-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                                         >
                                             <Image
