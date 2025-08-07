@@ -43,6 +43,10 @@ export async function GET(request) {
           p.code AS province_code,
           p.nom AS province_nom,
           s.nom AS station,
+          s.latitude,
+          s.longitude,
+          src.nom AS source_nom,
+          src.url AS source_url,
           a.annee,
           f.temperature_moy,
           f.precipitation_moy,
@@ -51,7 +55,8 @@ export async function GET(request) {
         JOIN Province p ON f.fk_id_province = p.id_province
         JOIN Station s ON f.fk_id_station = s.id_station
         JOIN Annee a ON f.fk_id_annee = a.id_annee
-        ORDER BY a.annee DESC
+        JOIN Source  src ON src.id_source = f.fk_id_source
+        ORDER BY s.nom, a.annee ASC 
       `);
       
       return Response.json(result.recordset);
