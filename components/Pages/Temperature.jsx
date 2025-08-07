@@ -79,7 +79,7 @@ export default function Temperature() {
                     </p>
                     <div className="text-center mt-12">
                         <a
-                            href="https://app.powerbi.com/groups/me/reports/462d096d-e183-4ce5-b6fc-1324659ccc7b/91ea5189a9c088a551d9?experience=power-bi"
+                            href="https://app.powerbi.com/groups/me/reports/fb7a8d6e-d838-446a-9c0c-d42c7193fc29/2db1b893b55c5ab02c11?experience=power-bi"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-white text-yellow-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-100 transition-all duration-300"
