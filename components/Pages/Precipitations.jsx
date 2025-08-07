@@ -113,7 +113,7 @@ export default function Precipitations() {
                         {/* Lien vers Power BI */}
                     <div className="text-center mt-12">
                         <a
-                            href="https://app.powerbi.com/groups/me/reports/f22f8e5d-2bf9-4bfe-b1ce-ec6da8671e4d/2db1b893b55c5ab02c11?experience=power-bi"
+                            href="https://app.powerbi.com/groups/me/reports/462d096d-e183-4ce5-b6fc-1324659ccc7b/2db1b893b55c5ab02c11?experience=power-bi"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-white text-yellow-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-100 transition-all duration-300"
