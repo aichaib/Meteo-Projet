@@ -7,8 +7,10 @@ import Contact from "@/components/Contact";
 export default function Home() {
   return (
    <>
-   <Accueil />
-    
+      <Accueil />
+      <Temperature />
+      <Precipitations />  
+      <Pollution />
    </>
   );
 }
