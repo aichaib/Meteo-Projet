@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { FaDatabase } from "react-icons/fa";
 
 export default function Temperature() {
     const [provinces, setProvinces] = useState([]);
@@ -10,6 +11,9 @@ export default function Temperature() {
     const [selectedAnnee, setSelectedAnnee] = useState('toutes');
     const [annees, setAnnees] = useState([]);
     const [error, setError] = useState(null);
+    const sourceList = [...new Set(temperatures.map(t => t.source_nom))].join(", ");
+    const sourceURL = [...new Set(temperatures.map(t => t.source_url))].join(", ");
+
 
     useEffect(() => {
         const fetchProvinces = async () => {
@@ -88,7 +92,7 @@ export default function Temperature() {
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 mb-8 border border-white/20">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Province</label>
+                            <label className="block text-sm  font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent mb-2">Province</label>
                             <select
                                 value={selectedProvince}
                                 onChange={(e) => setSelectedProvince(e.target.value)}
@@ -103,7 +107,7 @@ export default function Temperature() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Année</label>
+                            <label className="block text-sm  font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent mb-2">Année</label>
                             <select
                                 value={selectedAnnee}
                                 onChange={(e) => setSelectedAnnee(e.target.value)}
@@ -132,7 +136,7 @@ export default function Temperature() {
                 </div>
 
                 {temperatures.length > 0 && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
                             <div className="flex items-center">
                                 <Image
@@ -169,8 +173,21 @@ export default function Temperature() {
                                     </p>
                                 </div>
                             </div>
+
+                        </div>
+                        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white/20">
+                            <div className="flex items-center">
+                                <FaDatabase className="w-12 h-12 text-blue-600 mr-4" />
+                                <div>
+                                    <p className="text-sm text-gray-600">Sources de données</p>
+                                    <p className="text-2xl font-bold text-blue-600">{sourceList}</p>
+                                    <p className="text-2xl font-bold text-blue-600">{sourceURL}</p>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 )}
 
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
@@ -184,10 +201,12 @@ export default function Temperature() {
                             <table className="w-full">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Province</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Année</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Temp. Moy. (°C)</th>
-                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Station</th>
+                                        <th className="px-6 py-4 text-left text-sm  font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">Province</th>
+                                        <th className="px-6 py-4 text-left text-sm  font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">Année</th>
+                                        <th className="px-6 py-4 text-left text-sm  font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">Temp. Moy. (°C)</th>
+                                        <th className="px-6 py-4 text-left text-sm  font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">Station</th>
+                                        <th className="px-6 py-4 text-left text-sm  font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">Latitude</th>
+                                        <th className="px-6 py-4 text-left text-sm  font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">Longitude</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
@@ -197,6 +216,8 @@ export default function Temperature() {
                                             <td className="px-6 py-4 text-sm text-gray-700">{item.annee}</td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{item.temperature_moy.toFixed(1)} °C</td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{item.station}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{item.latitude?.toFixed(2)}</td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">{item.longitude?.toFixed(2)}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -211,9 +232,13 @@ export default function Temperature() {
                                 {error ? 'Erreur lors du chargement des données' : 'Aucune température trouvée pour les critères sélectionnés.'}
                             </p>
                         </div>
+
                     )}
+
                 </div>
+
             </div>
+
         </section>
     );
 }
