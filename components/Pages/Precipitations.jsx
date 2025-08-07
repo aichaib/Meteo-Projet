@@ -67,7 +67,7 @@ export default function Precipitations() {
             const params = new URLSearchParams();
             if (selectedProvince !== 'toutes') params.append('province', selectedProvince);
             if (selectedAnnee !== 'toutes') params.append('annee', selectedAnnee);
-            
+
             const response = await fetch(`/api/precipitations?${params}`);
             if (!response.ok) {
                 throw new Error(`Erreur HTTP: ${response.status}`);
@@ -101,9 +101,21 @@ export default function Precipitations() {
                         Données de Précipitations
                     </h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Explorez les données de précipitations au Canada entre 2019 et 2024. 
+                        Explorez les données de précipitations au Canada entre 2019 et 2024.
                         Filtrez par province et année pour analyser les tendances climatiques.
                     </p>
+
+                        {/* Lien vers Power BI */}
+                    <div className="text-center mt-12">
+                        <a
+                            href="https://app.powerbi.com/groups/me/reports/f22f8e5d-2bf9-4bfe-b1ce-ec6da8671e4d/2db1b893b55c5ab02c11?experience=power-bi"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-white text-yellow-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-100 transition-all duration-300"
+                        >
+                            🌧️ Accéder au rapport des précipitations par province et année (Power BI)
+                        </a>
+                    </div>
                 </div>
 
                 {/* Message d'erreur */}
@@ -219,7 +231,7 @@ export default function Precipitations() {
 
                 {/* Tableau de données */}
                 <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                    
+
                     {loading ? (
                         <div className="p-8 text-center">
                             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
@@ -228,32 +240,32 @@ export default function Precipitations() {
                     ) : precipitations.length > 0 ? (
                         <div className="overflow-x-auto">
                             <table className="w-full">
-                                                                 <thead className="bg-gray-50">
-                                     <tr>
-                                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Province</th>
-                                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Année</th>
-                                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Précipitations (mm)</th>
-                                         <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Station</th>
-                                     </tr>
-                                 </thead>
-                                 <tbody className="divide-y divide-gray-200">
-                                     {precipitations.map((item, index) => (
-                                         <tr key={index} className="hover:bg-gray-50 transition-colors duration-200">
-                                             <td className="px-6 py-4 text-sm text-gray-900 font-medium">
-                                                 {item.province_nom}
-                                             </td>
-                                             <td className="px-6 py-4 text-sm text-gray-700">
-                                                 {item.annee}
-                                             </td>
-                                             <td className="px-6 py-4 text-sm text-gray-700">
-                                                 {item.precipitation_moy ? `${item.precipitation_moy.toFixed(1)} mm` : 'N/A'}
-                                             </td>
-                                             <td className="px-6 py-4 text-sm text-gray-700">
-                                                 {item.station}
-                                             </td>
-                                         </tr>
-                                     ))}
-                                 </tbody>
+                                <thead className="bg-gray-50">
+                                    <tr>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Province</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Année</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Précipitations (mm)</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Station</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200">
+                                    {precipitations.map((item, index) => (
+                                        <tr key={index} className="hover:bg-gray-50 transition-colors duration-200">
+                                            <td className="px-6 py-4 text-sm text-gray-900 font-medium">
+                                                {item.province_nom}
+                                            </td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                                {item.annee}
+                                            </td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                                {item.precipitation_moy ? `${item.precipitation_moy.toFixed(1)} mm` : 'N/A'}
+                                            </td>
+                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                                {item.station}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
                             </table>
                         </div>
                     ) : (

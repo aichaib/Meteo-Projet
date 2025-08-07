@@ -8,10 +8,7 @@ export default function Home() {
   return (
    <>
    <Accueil />
-    <Temperature />
-    <Precipitations />
-    <Pollution />
-    <Contact />
+    
    </>
   );
 }
