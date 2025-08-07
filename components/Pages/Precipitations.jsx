@@ -71,7 +71,11 @@ export default function Precipitations() {
             if (selectedProvince !== 'toutes') params.append('province', selectedProvince);
             if (selectedAnnee !== 'toutes') params.append('annee', selectedAnnee);
 
+ 
             const response = await fetch(`/api/faits?${params}`);
+
+            const response = await fetch(`/api/precipitations?${params}`);
+
             if (!response.ok) {
                 throw new Error(`Erreur HTTP: ${response.status}`);
             }
@@ -107,6 +111,18 @@ export default function Precipitations() {
                         Explorez les données de précipitations au Canada entre 2019 et 2024.
                         Filtrez par province et année pour analyser les tendances climatiques.
                     </p>
+
+                        {/* Lien vers Power BI */}
+                    <div className="text-center mt-12">
+                        <a
+                            href="https://app.powerbi.com/groups/me/reports/f22f8e5d-2bf9-4bfe-b1ce-ec6da8671e4d/2db1b893b55c5ab02c11?experience=power-bi"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-white text-yellow-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-100 transition-all duration-300"
+                        >
+                            🌧️ Accéder au rapport des précipitations par province et année (Power BI)
+                        </a>
+                    </div>
                 </div>
 
                 {/* Message d'erreur */}
@@ -244,12 +260,19 @@ export default function Precipitations() {
                             <table className="w-full">
                                 <thead className="bg-gray-50">
                                     <tr>
+
                                         <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">Province</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">Année</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">Précipitations (mm)</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">Station</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">Latitude</th>
                                         <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">Longitude</th>
+
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Province</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Année</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Précipitations (mm)</th>
+                                        <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Station</th>
+
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200">
@@ -267,8 +290,11 @@ export default function Precipitations() {
                                             <td className="px-6 py-4 text-sm text-gray-700">
                                                 {item.station}
                                             </td>
+
                                             <td className="px-6 py-4 text-sm text-gray-700">{item.latitude?.toFixed(2)}</td>
                                             <td className="px-6 py-4 text-sm text-gray-700">{item.longitude?.toFixed(2)}</td>
+
+
                                         </tr>
                                     ))}
                                 </tbody>

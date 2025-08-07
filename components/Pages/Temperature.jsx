@@ -67,6 +67,7 @@ export default function Temperature() {
     }, [selectedProvince, selectedAnnee]);
 
     return (
+
         <section id="temperature" className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 py-12">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-8">
@@ -76,7 +77,18 @@ export default function Temperature() {
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                         Explorez les températures moyennes au Canada. Filtrez par province et année pour voir les tendances climatiques.
                     </p>
+                    <div className="text-center mt-12">
+                        <a
+                            href="https://app.powerbi.com/groups/me/reports/462d096d-e183-4ce5-b6fc-1324659ccc7b/91ea5189a9c088a551d9?experience=power-bi"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-white text-yellow-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-100 transition-all duration-300"
+                        >
+                            📊 Accéder au rapport Power BI
+                        </a>
+                    </div>
                 </div>
+
 
                 {error && (
                     <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
@@ -240,5 +252,6 @@ export default function Temperature() {
             </div>
 
         </section>
+
     );
 }

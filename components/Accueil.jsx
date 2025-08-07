@@ -33,17 +33,17 @@ export default function HomePage() {
                                     className="object-cover w-full h-64 md:h-80"
                                 />
                             </div>
-                            
+
                             <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
                                 Sensibilisation au réchauffement climatique
                             </h2>
-                            
+
                             <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                                Ce site présente des données réelles sur la température, 
-                                les précipitations et la pollution au Canada entre 2019 et 2024 
+                                Ce site présente des données réelles sur la température,
+                                les précipitations et la pollution au Canada entre 2019 et 2024
                                 afin de sensibiliser le public aux impacts du changement climatique.
                             </p>
-                            
+
                             {/* Second Image Section */}
                             <div className="rounded-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
                                 <Image
@@ -65,8 +65,8 @@ export default function HomePage() {
                                 <h3 className="text-2xl font-bold mb-6 text-gray-800">Explorer les données</h3>
                                 <ul className="space-y-4">
                                     <li>
-                                        <Link 
-                                            href="#temperature" 
+                                        <Link
+                                            href="#temperature"
                                             className="flex items-center p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                                         >
                                             <Image
@@ -80,8 +80,8 @@ export default function HomePage() {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link 
-                                            href="#precipitations" 
+                                        <Link
+                                            href="#precipitations"
                                             className="flex items-center p-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                                         >
                                             <Image
@@ -95,8 +95,8 @@ export default function HomePage() {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link 
-                                            href="#pollution" 
+                                        <Link
+                                            href="#pollution"
                                             className="flex items-center p-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
                                         >
                                             <Image
@@ -117,8 +117,8 @@ export default function HomePage() {
                                 <h3 className="text-2xl font-bold mb-6 text-gray-800">Provinces du Canada</h3>
                                 <div className="grid grid-cols-3 gap-3">
                                     {provinces.map((code) => (
-                                        <div 
-                                            key={code} 
+                                        <div
+                                            key={code}
                                             className="bg-gradient-to-br from-gray-100 to-gray-200 hover:from-blue-100 hover:to-blue-200 text-gray-800 font-semibold py-3 px-2 rounded-xl text-center transform hover:scale-110 transition-all duration-300 cursor-pointer border border-gray-200 hover:border-blue-300"
                                         >
                                             {code}
