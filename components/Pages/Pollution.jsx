@@ -54,12 +54,12 @@ export default function Pollution() {
       // Sécurité: si l’API ne filtrait pas, on garde ton filtre client
       const filtered = Array.isArray(data)
         ? data.filter(item => {
-            const okProv =
-              selectedProvince === "toutes" || item.province_code === selectedProvince;
-            const okYear =
-              selectedAnnee === "toutes" || item.annee === parseInt(selectedAnnee);
-            return okProv && okYear && item.co2_moy_mt !== null;
-          })
+          const okProv =
+            selectedProvince === "toutes" || item.province_code === selectedProvince;
+          const okYear =
+            selectedAnnee === "toutes" || item.annee === parseInt(selectedAnnee);
+          return okProv && okYear && item.co2_moy_mt !== null;
+        })
         : [];
       setPollution(filtered);
     } catch (e) {
@@ -93,17 +93,17 @@ export default function Pollution() {
             Explorez les émissions moyennes par province (2019–2023).
           </p>
 
-           {/* Lien vers Power BI */}
-                    <div className="text-center mt-12">
-                        <a
-                           href="https://app.powerbi.com/groups/me/reports/1dada293-3eaa-495e-9d35-d15b60f0d5d4/32ba38f7505e068a113d?experience=power-bi"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-white text-yellow-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-100 transition-all duration-300"
-                        >
-                             Accéder au rapport de pollution par province et année (Power BI)
-                        </a>
-                    </div>
+          {/* Lien vers Power BI */}
+          <div className="text-center mt-12">
+            <a
+              href="https://app.powerbi.com/groups/me/reports/1dada293-3eaa-495e-9d35-d15b60f0d5d4/32ba38f7505e068a113d?experience=power-bi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white text-yellow-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-100 transition-all duration-300"
+            >
+              Accéder au rapport de pollution par province et année (Power BI)
+            </a>
+          </div>
         </div>
 
         {error && (
@@ -201,7 +201,7 @@ export default function Pollution() {
                   <p className="text-sm font-semibold text-blue-700 truncate" title={sourceList}>
                     {sourceList || "—"}
                   </p>
-                  
+
                   {sourceURLs.length === 1 && (
                     <a
                       href={sourceURLs[0]}
