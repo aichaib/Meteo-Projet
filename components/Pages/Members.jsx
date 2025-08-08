@@ -1,4 +1,4 @@
-'use client';   
+'use client';
 
 import React from 'react';
 import Image from 'next/image';
@@ -6,32 +6,32 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function Members() {
-   
+
     const [searchTerm, setSearchTerm] = useState("");
 
     const members = [
-        { 
-            
+        {
+
             name: "Aïchath Olouwakemi Awèni Ibikunle",
-            description: "Chef de projet",
+            description: "developpement backend, API, base de données et hébergement",
             image: "/img/aichath.webp"
         },
         {
             name: "Miguel Proulx",
-            description: "Développeuse Frontend",
+            description: "ajout des données et filtres de température",
             image: "/img/miguel.webp"
         },
         {
             name: "Taha Ait Bella ",
-            description: "Développeuse Backend",
-            image: "/img/lea.webp"
+            description: "enrichi la partie précipitations et optimisé la page d’accueil",
+            image: "/img/taha.webp"
         },
         {
             name: "Kossi Amen Adzoyi",
-            description: "page des membres de l'équipe, views power BI",
+            description: "page des membres de l'équipe, header, creation des graphes et ajout des codes pour l'affichage (power BI)",
             image: "/img/amen.webp"
         },
-       
+
     ];
 
     return (
