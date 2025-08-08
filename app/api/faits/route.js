@@ -1,72 +1,67 @@
 import { getSqlPool } from "@/lib/db";
 
-// Récupère les données météo ou les années
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
-    const type = searchParams.get('type');
-    
-    // Données de secours si la DB plante
-    const anneesTest = [
-      { annee: 2024 },
-      { annee: 2023 },
-      { annee: 2022 },
-      { annee: 2021 },
-      { annee: 2020 },
-      { annee: 2019 }
-    ];
-    
-    // Récupère juste les années
-    if (type === 'annees') {
+    const type    = searchParams.get("type");
+    const metric  = searchParams.get("metric");      // "temp" | "precip" | "co2" (optionnel)
+    const prov    = searchParams.get("province");    // "QC" etc. (optionnel)
+    const annee   = searchParams.get("annee");       // "2023" (optionnel)
+
+    if (type === "annees") {
       try {
         const pool = await getSqlPool();
-        const result = await pool.request().query(`
-          SELECT DISTINCT annee 
-          FROM Annee 
-          ORDER BY annee DESC
+        const r = await pool.request().query(`
+          SELECT annee FROM Annee ORDER BY annee DESC
         `);
-        
-        console.log('Années récupérées de la base de données');
-        return Response.json(result.recordset);
-      } catch (dbError) {
-        console.error('Erreur de connexion à la base de données:', dbError);
-        console.log('Utilisation des années de test');
-        return Response.json(anneesTest);
+        return Response.json(r.recordset);
+      } catch {
+        return Response.json(
+          [{ annee: 2024 }, { annee: 2023 }, { annee: 2022 }, { annee: 2021 }, { annee: 2020 }, { annee: 2019 }]
+        );
       }
     }
-    
-    // Récupère toutes les données météo
-    try {
-      const pool = await getSqlPool();
-      const result = await pool.request().query(`
-        SELECT TOP 100 
-          p.code AS province_code,
-          p.nom AS province_nom,
-          s.nom AS station,
-          s.latitude,
-          s.longitude,
-          src.nom AS source_nom,
-          src.url AS source_url,
-          a.annee,
-          f.temperature_moy,
-          f.precipitation_moy,
-          f.co2_moy_mt
-        FROM Fait_Meteo f
-        JOIN Province p ON f.fk_id_province = p.id_province
-        JOIN Station s ON f.fk_id_station = s.id_station
-        JOIN Annee a ON f.fk_id_annee = a.id_annee
-        JOIN Source  src ON src.id_source = f.fk_id_source
-        ORDER BY s.nom, a.annee ASC 
-      `);
-      
-      return Response.json(result.recordset);
-    } catch (dbError) {
-      console.error('Erreur de connexion à la base de données:', dbError);
-      return Response.json([]);
-    }
-    
-  } catch (error) {
-    console.error('Erreur lors de la récupération des données:', error);
-    return Response.json({ error: 'Erreur serveur' }, { status: 500 });
+
+    const pool = await getSqlPool();
+
+    // petits WHERE dynamiques
+    const where = [];
+    if (prov)  where.push(`p.code = @prov`);
+    if (annee) where.push(`a.annee = @annee`);
+    if (metric === "co2")     where.push(`f.co2_moy_mt IS NOT NULL`);
+    if (metric === "temp")    where.push(`f.temperature_moy IS NOT NULL`);
+    if (metric === "precip")  where.push(`f.precipitation_moy IS NOT NULL`);
+    const whereSql = where.length ? `WHERE ${where.join(" AND ")}` : "";
+
+    const req = pool.request();
+    if (prov)  req.input("prov", prov);
+    if (annee) req.input("annee", +annee);
+
+    const result = await req.query(`
+      SELECT
+        p.code           AS province_code,
+        p.nom            AS province_nom,
+        s.nom            AS station,
+        s.latitude,
+        s.longitude,
+        src.nom          AS source_nom,
+        src.url          AS source_url,
+        a.annee,
+        f.temperature_moy,
+        f.precipitation_moy,
+        f.co2_moy_mt
+      FROM Fait_Meteo f
+      JOIN Province p     ON f.fk_id_province = p.id_province
+      LEFT JOIN Station s ON f.fk_id_station  = s.id_station   -- <- clé: garder les lignes CO2 sans station
+      JOIN Annee a        ON f.fk_id_annee    = a.id_annee
+      JOIN Source src     ON src.id_source    = f.fk_id_source
+      ${whereSql}
+      ORDER BY p.code, a.annee ASC
+    `);
+
+    return Response.json(result.recordset);
+  } catch (err) {
+    console.error(err);
+    return Response.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

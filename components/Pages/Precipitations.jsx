@@ -72,14 +72,14 @@ export default function Precipitations() {
             if (selectedAnnee !== 'toutes') params.append('annee', selectedAnnee);
 
  
-            const response = await fetch(`/api/faits?${params}`);
+            const response = await fetch(`/api/faits?${params.toString()}`);
 
             if (!response.ok) {
                 throw new Error(`Erreur HTTP: ${response.status}`);
             }
             const data = await response.json();
             if (Array.isArray(data)) {
-                setPrecipitations(data);
+                setPrecipitations(data.filter(d => d.precipitation_moy !== null));
             } else {
                 console.error('Données de précipitations invalides:', data);
                 setPrecipitations([]);
