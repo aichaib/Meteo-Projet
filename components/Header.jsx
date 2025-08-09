@@ -55,7 +55,7 @@ export default function Header() {
                 className="flex items-center bg-purple-600 hover:bg-purple-700 transition-colors px-4 py-2 rounded-md"
               >
                 <span className="mr-2 text-lg" />
-                Membres
+                À propos
               </Link>
             </div>
           </div>
