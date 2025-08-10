@@ -90,14 +90,7 @@ export default function Resultats({ y1 = 2019, y2 = 2024 }) {
                         icon={FaThermometerHalf}
                         accent="from-rose-500 to-orange-500"
                     />
-                    <Card
-                        title="Année la moins chaude"
-                        subtitle="Température moyenne la plus basse"
-                        value={yCold?.annee ?? "—"}
-                        unit={yCold ? `${Number(yCold.avg_temp).toFixed(1)} °C` : ""}
-                        icon={FaThermometerHalf}
-                        accent="from-blue-500 to-indigo-500"
-                    />
+
                     <Card
                         title="Année la plus pluvieuse"
                         subtitle="Précipitation moyenne"
@@ -105,14 +98,6 @@ export default function Resultats({ y1 = 2019, y2 = 2024 }) {
                         unit={yWet ? `${Number(yWet.avg_precip).toFixed(1)} mm` : ""}
                         icon={FaCloudRain}
                         accent="from-sky-500 to-emerald-500"
-                    />
-                    <Card
-                        title="Année la moins pluvieuse"
-                        subtitle="Précipitation moyenne"
-                        value={yDry?.annee ?? "—"}
-                        unit={yDry ? `${Number(yDry.avg_precip).toFixed(1)} mm` : ""}
-                        icon={FaCloudRain}
-                        accent="from-teal-500 to-cyan-500"
                     />
 
                     <Card
@@ -123,6 +108,25 @@ export default function Resultats({ y1 = 2019, y2 = 2024 }) {
                         icon={FaIndustry}
                         accent="from-slate-700 to-gray-500"
                     />
+
+                    <Card
+                        title="Année la moins chaude"
+                        subtitle="Température moyenne la plus basse"
+                        value={yCold?.annee ?? "—"}
+                        unit={yCold ? `${Number(yCold.avg_temp).toFixed(1)} °C` : ""}
+                        icon={FaThermometerHalf}
+                        accent="from-blue-500 to-indigo-500"
+                    />
+
+                    <Card
+                        title="Année la moins pluvieuse"
+                        subtitle="Précipitation moyenne"
+                        value={yDry?.annee ?? "—"}
+                        unit={yDry ? `${Number(yDry.avg_precip).toFixed(1)} mm` : ""}
+                        icon={FaCloudRain}
+                        accent="from-teal-500 to-cyan-500"
+                    />
+
                     <Card
                         title="Année la moins polluée"
                         subtitle="Émissions moyennes"
@@ -148,14 +152,6 @@ export default function Resultats({ y1 = 2019, y2 = 2024 }) {
                         icon={FaMapMarkerAlt}
                         accent="from-rose-500 to-orange-500"
                     />
-                    <Card
-                        title="Province la moins chaude"
-                        subtitle="Température moyenne"
-                        value={pCold?.province_nom ?? "—"}
-                        unit={pCold ? `${Number(pCold.avg_temp).toFixed(1)} °C` : ""}
-                        icon={FaMapMarkerAlt}
-                        accent="from-blue-500 to-indigo-500"
-                    />
 
                     <Card
                         title="Province la plus pluvieuse"
@@ -167,21 +163,30 @@ export default function Resultats({ y1 = 2019, y2 = 2024 }) {
                     />
 
                     <Card
-                        title="Province la moins pluvieuse"
-                        subtitle="Précipitation moyenne"
-                        value={pDry?.province_nom ?? "—"}
-                        unit={pDry ? `${Number(pDry.avg_precip).toFixed(1)} mm` : ""}
-                        icon={FaCloudRain}
-                        accent="from-teal-500 to-cyan-500"
-                    />
-
-                    <Card
                         title="Province la plus polluée"
                         subtitle="Émissions moyennes"
                         value={pPoll?.province_nom ?? "—"}
                         unit={pPoll ? `${Number(pPoll.avg_co2 ?? pPoll.avg_co2_mt).toFixed(1)} Mt CO₂e` : ""}
                         icon={FaIndustry}
                         accent="from-slate-700 to-gray-500"
+                    />
+
+                    <Card
+                        title="Province la moins chaude"
+                        subtitle="Température moyenne"
+                        value={pCold?.province_nom ?? "—"}
+                        unit={pCold ? `${Number(pCold.avg_temp).toFixed(1)} °C` : ""}
+                        icon={FaMapMarkerAlt}
+                        accent="from-blue-500 to-indigo-500"
+                    />
+
+                    <Card
+                        title="Province la moins pluvieuse"
+                        subtitle="Précipitation moyenne"
+                        value={pDry?.province_nom ?? "—"}
+                        unit={pDry ? `${Number(pDry.avg_precip).toFixed(1)} mm` : ""}
+                        icon={FaCloudRain}
+                        accent="from-teal-500 to-cyan-500"
                     />
 
                     <Card

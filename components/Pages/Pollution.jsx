@@ -82,11 +82,11 @@ export default function Pollution() {
       : "0.00";
 
   return (
-    <section id="pollution" className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 py-12">
+    <section id="pollution" className="min-h-screen bg-gradient-to-br from-violet-50 to-purple-50 py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent mb-4">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent mb-4">
             Données de la Pollution (CO₂)
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -99,7 +99,7 @@ export default function Pollution() {
               href="https://app.powerbi.com/groups/me/reports/1dada293-3eaa-495e-9d35-d15b60f0d5d4/32ba38f7505e068a113d?experience=power-bi"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-yellow-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-100 transition-all duration-300"
+              className="bg-white text-purple-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-purple-100 transition-all duration-300"
             >
               Accéder au rapport de pollution par province et année (Power BI)
             </a>
@@ -121,7 +121,7 @@ export default function Pollution() {
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 mb-8 border border-white/20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <label className="block text-sm font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent mb-2">
+              <label className="block text-sm font-bold bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent mb-2">
                 Province
               </label>
               <select
@@ -223,7 +223,7 @@ export default function Pollution() {
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
           {loading ? (
             <div className="p-8 text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-600 mx-auto"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
               <p className="mt-4 text-gray-600">Chargement des données...</p>
             </div>
           ) : pollution.length > 0 ? (
@@ -231,10 +231,10 @@ export default function Pollution() {
               <table className="w-full">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">Province</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">Année</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">CO₂ (Mt CO₂e)</th>
-                    <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-yellow-500 to-red-500 bg-clip-text text-transparent">Source</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">Province</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">Année</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">CO₂ (Mt CO₂e)</th>
+                    <th className="px-6 py-4 text-left text-sm font-bold bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">Source</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
