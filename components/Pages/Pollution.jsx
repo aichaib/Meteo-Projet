@@ -160,7 +160,8 @@ export default function Pollution() {
                   setSelectedProvince("toutes");
                   setSelectedAnnee("toutes");
                 }}
-                className="w-full bg-gradient-to-r from-yellow-500 to-red-500 text-white py-3 px-6 rounded-xl font-semibold hover:from-yellow-600 hover:to-red-600 transform hover:scale-105 transition-all duration-300"
+                className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-3 px-6 rounded-xl font-semibold hover:from-violet-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300"
+
               >
                 Réinitialiser
               </button>
