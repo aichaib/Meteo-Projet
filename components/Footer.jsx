@@ -24,11 +24,14 @@ export default function Footer() {
 
   return (
     <footer className="w-full mt-auto">
-      {/* On applique le même dégradé et les mêmes effets que dans le header */}
       <div className="bg-gradient-to-r from-green-500 via-teal-500 to-blue-600 text-white shadow-md backdrop-blur-md px-2 py-3">
         <div className="max-w-7xl mx-auto flex flex-col items-center space-y-1">
           <div className="text-sm sm:text-base font-medium">
-            {dateStr} — {timeStr}
+
+           <span suppressHydrationWarning>
+              {now ? `${dateStr} — ${timeStr}` : ""}
+            </span>
+
           </div>
           <div className="text-xs sm:text-sm italic opacity-90">
             Informez‑vous sur les changements climatiques et la météo au&nbsp;Canada

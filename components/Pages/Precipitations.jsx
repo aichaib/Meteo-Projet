@@ -112,7 +112,14 @@ export default function Precipitations() {
 
                         {/* Lien vers Power BI */}
                     <div className="text-center mt-12">
-                        <iframe title="Precipitations" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=764d3e9b-ac72-4a1e-864c-92249ce360e7&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30" frameborder="0" allowFullScreen="true"></iframe>
+                        <iframe
+                            title="Precipitations"
+                            width="1140"
+                            height="541.25"
+                            src="https://app.powerbi.com/reportEmbed?reportId=764d3e9b-ac72-4a1e-864c-92249ce360e7&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30"
+                            frameBorder="0"
+                            allowFullScreen
+                        ></iframe>
                     </div>
                 </div>
 
