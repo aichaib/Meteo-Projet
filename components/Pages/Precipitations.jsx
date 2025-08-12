@@ -112,14 +112,7 @@ export default function Precipitations() {
 
                         {/* Lien vers Power BI */}
                     <div className="text-center mt-12">
-                        <a
-                           href="https://app.powerbi.com/groups/me/reports/764d3e9b-ac72-4a1e-864c-92249ce360e7/2db1b893b55c5ab02c11?experience=power-bi"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-white text-yellow-600 font-bold py-3 px-6 rounded-xl shadow hover:bg-yellow-100 transition-all duration-300"
-                        >
-                            🌧️ Accéder au rapport des précipitations par province et année (Power BI)
-                        </a>
+                        <iframe title="Precipitations" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=764d3e9b-ac72-4a1e-864c-92249ce360e7&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30" frameborder="0" allowFullScreen="true"></iframe>
                     </div>
                 </div>
 

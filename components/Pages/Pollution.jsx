@@ -93,8 +93,10 @@ export default function Pollution() {
             Explorez les émissions moyennes par province (2019–2023).
           </p>
 
+          
           {/* Lien vers Power BI */}
           <div className="text-center mt-12">
+<<<<<<< Updated upstream
             <a
               href="https://app.powerbi.com/groups/me/reports/1dada293-3eaa-495e-9d35-d15b60f0d5d4/32ba38f7505e068a113d?experience=power-bi"
               target="_blank"
@@ -103,6 +105,10 @@ export default function Pollution() {
             >
               Accéder au rapport de pollution par province et année (Power BI)
             </a>
+=======
+            <iframe title="Pollution" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=1dada293-3eaa-495e-9d35-d15b60f0d5d4&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30" frameborder="0" allowFullScreen="true">
+            </iframe>
+>>>>>>> Stashed changes
           </div>
         </div>
 
