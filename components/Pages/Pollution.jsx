@@ -97,14 +97,12 @@ export default function Pollution() {
           {/* Lien vers Power BI */}
           <div className="text-center mt-12">
            
-            <iframe
-              title="Pollution"
-              width="1140"
-              height="541.25"
+            <iframe title="Pollution" width="1140"
+              height="650"
               src="https://app.powerbi.com/reportEmbed?reportId=1dada293-3eaa-495e-9d35-d15b60f0d5d4&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30"
               frameBorder="0"
-              allowFullScreen>
-            </iframe>
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
 
