@@ -77,15 +77,17 @@ export default function Temperature() {
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                         Explorez les températures moyennes au Canada. Filtrez par province et année pour voir les tendances climatiques.
                     </p>
-                    <div className=" mt-6">
-                    <iframe title="Température"
-                        width="1140"
-                        height="650"
-                        src="https://app.powerbi.com/reportEmbed?reportId=6028ee35-6d5d-4e40-abc1-fe8a483aa45b&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30"
-                        frameBorder="0"
-                        allowFullScreen
-                        
-                        ></iframe>
+                    <div className="mt-6">
+                        <div className="relative w-full aspect-video max-w-screen-xl mx-auto">
+                            <iframe
+                                title="Température"
+                                src="https://app.powerbi.com/reportEmbed?reportId=6028ee35-6d5d-4e40-abc1-fe8a483aa45b&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30"
+                                className="absolute inset-0 h-full w-full rounded-lg"
+                                frameBorder="0"
+                                allowFullScreen
+                                loading="lazy"
+                            />
+                        </div>
                     </div>
 
                 </div>
