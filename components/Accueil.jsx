@@ -142,6 +142,20 @@ export default function HomePage() {
                         </button>
                     </div>
                 </div>
+                <div className="mt-12 text-center">
+                    <p className="text-lg font-semibold mb-4">Découvrez la carte des provinces</p>
+                    <div className="rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+                        <iframe
+                            title="carteprojet"
+                            width="100%"
+                            height="541"
+                            src="https://app.powerbi.com/reportEmbed?reportId=fb9c8c5e-87ec-41ad-96b7-5947b0959538&autoAuth=true&ctid=ad8a84ef-f1f3-4b14-ad08-b99ca66f7e30"
+                            frameBorder="0"
+                            allowFullScreen={true}
+                        ></iframe>
+                    </div>
+                </div>
+
             </main>
         </div>
     );
